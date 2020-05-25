@@ -5,8 +5,9 @@ from crosswalk.validators import (
     validate_no_reserved_keys,
     validate_shallow_dict,
 )
-from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
+#from django.contrib.auth.models import User
+from django.conf import settings
+from django.db.models import JSONField
 from django.db import models
 from django.db.models import Q, F
 
@@ -45,7 +46,7 @@ class Entity(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(
-        User, related_name="+", null=True, on_delete=models.SET_NULL
+        settings.AUTH_USER_MODEL, related_name="+", null=True, on_delete=models.SET_NULL
     )
 
     @property

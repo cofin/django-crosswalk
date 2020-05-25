@@ -1,7 +1,8 @@
 import random
 import string
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 
@@ -12,7 +13,8 @@ class ApiUser(models.Model):
             for _ in range(20)
         )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     token = models.SlugField(
         max_length=20, default=generate_token, editable=False, unique=True
     )
