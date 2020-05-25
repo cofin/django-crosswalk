@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
 
@@ -7,7 +8,7 @@ from .models import Domain, Entity
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = settings.AUTH_USER_MODEL
         fields = ("username", "first_name", "last_name", "email")
 
 
